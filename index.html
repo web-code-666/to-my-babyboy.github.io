@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>to my babyboy</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&family=Playfair+Display:ital@1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      /* Tema Warna Biru */
+      --primary-blue: #60a5fa;
+      --secondary-blue: #3b82f6;
+      --dark-blue: #2563eb;
+      --light-blue: #dbeafe;
+      --text-color: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      /* Gradasi Tema Warna Biru */
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #93c5fd 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: var(--text-color);
+    }
+
+    .section {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --- HALAMAN 1: PIN --- */
+    .pin-dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .dot.active {
+      background-color: white;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      width: 220px;
+      margin: 0 auto;
+    }
+
+    .num-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid white;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .num-btn:active {
+      background: white;
+      color: var(--dark-blue);
+    }
+
+    /* --- HALAMAN 2: LAYOUT SURAT --- */
+    .envelope {
+      background: #f8fbff;
+      padding: 28px 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      font-family: "Playfair Display", serif;
+      color: #1e293b;
+      line-height: 1.7;
+      text-align: left;
+      max-height: 75vh;
+      max-height: 75dvh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--secondary-blue) rgba(224, 242, 254, 0.6);
+    }
+
+    /* Custom Scrollbar */
+    .envelope::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .envelope::-webkit-scrollbar-track {
+      background: rgba(224, 242, 254, 0.5);
+      border-radius: 10px;
+      margin: 8px 0;
+    }
+
+    .envelope::-webkit-scrollbar-thumb {
+      background: var(--secondary-blue);
+      border-radius: 10px;
+    }
+
+    .envelope::-webkit-scrollbar-thumb:hover {
+      background: var(--dark-blue);
+    }
+
+    button.main-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      background: var(--dark-blue);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-family: "Poppins", sans-serif;
+    }
+
+    button.main-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+    }
+
+    /* --- HALAMAN 3: LOVE MUTER --- */
+    .heart-stage {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    #c3,
+    #c3h {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #wlayer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Teks kata mengorbit dengan pendar kilau MERAH */
+    .word {
+      position: absolute;
+      font-family: "Poppins", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 14px rgba(255, 20, 60, 0.95), 0 0 22px rgba(220, 0, 40, 0.8);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .swal2-popup {
+      border-radius: 20px !important;
+      font-family: "Poppins", sans-serif !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Music Player (musik.mp4) -->
+  <audio id="bgMusic" src="musik.mp4" loop preload="auto"></audio>
+  <video id="bgVideo" src="musik.mp4" loop playsinline style="display:none"></video>
+
+  <!-- 1. Halaman PIN -->
+  <div id="step1" class="section active">
+    <h2 style="margin-bottom: 20px">Enter Secret PIN</h2>
+    <div class="pin-dots-container" id="pinDots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="numpad">
+      <button class="num-btn" onclick="pressNum('1')">1</button>
+      <button class="num-btn" onclick="pressNum('2')">2</button>
+      <button class="num-btn" onclick="pressNum('3')">3</button>
+      <button class="num-btn" onclick="pressNum('4')">4</button>
+      <button class="num-btn" onclick="pressNum('5')">5</button>
+      <button class="num-btn" onclick="pressNum('6')">6</button>
+      <button class="num-btn" onclick="pressNum('7')">7</button>
+      <button class="num-btn" onclick="pressNum('8')">8</button>
+      <button class="num-btn" onclick="pressNum('9')">9</button>
+      <div style="grid-column: span 1"></div>
+      <button class="num-btn" onclick="pressNum('0')">0</button>
+      <button class="num-btn" onclick="clearPin()" style="font-size: 0.7rem">
+        CLEAR
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. Halaman Surat 1 -->
+  <div id="step2" class="section">
+    <div class="envelope">
+      <p>sayang, aku mau kamu tahu satu hal, aku bukan sedang menyerah, apalagi berniat melepaskan kamu. bukan itu yang
+        aku inginkan. aku masih ingin melihat kamu tumbuh, berhasil, mencapai semua impianmu, dan menjadi seseorang yang
+        selama ini kamu perjuangkan. aku masih ingin menjadi orang yang ikut bahagia ketika kamu mendapatkan sesuatu
+        yang baik dalam hidupmu. tetapi entah kenapa, terkadang ada ketakutan yang sulit sekali aku jelaskan.
+        aku takut, kalau suatu hari nanti, entah dalam hitungan hari, minggu, bulan, bahkan tahun, justru kamu yang
+        memilih untuk pergi. kamu yang melepaskan aku, kamu yang merasa lelah, dan kamu yang akhirnya menyerah dengan
+        hubungan ini. aku takut suatu saat nanti semua yang sedang kita bangun harus berakhir karena kamu tidak lagi
+        ingin memperjuangkannya. mungkin bagimu itu hanya kemungkinan, tetapi bagiku membayangkan hal itu saja sudah
+        cukup membuat hati aku terasa sakit.
+        aku pernah mengalami kehilangan seseorang yang benar-benar aku perjuangkan. aku tahu bagaimana rasanya menaruh
+        harapan begitu besar kepada seseorang, memberikan banyak bagian dari diri sendiri, lalu harus menerima kenyataan
+        bahwa semuanya tidak berjalan seperti yang aku harapkan. rasa sakitnya bukan sesuatu yang mudah aku lupakan.
+        mungkin karena itu sampai sekarang aku masih takut untuk kembali berada di posisi yang sama. aku tidak ingin
+        mengulang luka yang pernah membuat aku begitu sulit untuk bangkit.
+        dan tentang pertemuan kita nanti, jujur aku juga masih punya banyak kekhawatiran. aku takut ketika kita akhirnya
+        bertemu, ternyata ada hal-hal yang membuat kamu berpikir berbeda tentang aku. aku takut kamu memiliki ekspektasi
+        tertentu, lalu setelah melihat aku secara langsung, ada sesuatu yang berubah dari cara kamu memandang aku. bukan
+        karena aku tidak ingin bertemu denganmu, justru karena pertemuan itu berarti untuk aku, makanya aku ingin
+        mempersiapkannya dengan baik.
+        aku belum ingin terburu-buru untuk bertemu. masih ada beberapa hal yang ingin aku siapkan, dan sejauh ini baru
+        sedikit yang bisa aku persiapkan. aku ingin ketika hari itu tiba, aku bisa datang dengan perasaan yang lebih
+        tenang, tanpa terus memikirkan apakah aku sudah cukup baik atau belum. aku harap kamu bisa memahami itu dan
+        tidak menganggapnya sebagai bentuk penolakan terhadap kamu.
+        sayang, aku tidak pernah meminta kamu menjadi seseorang yang sempurna. aku juga tidak menuntut kamu untuk selalu
+        punya jawaban atas semua masalahmu. aku hanya berharap ketika keadaan sedang sulit, kita tidak menjadikan pergi
+        sebagai jalan keluar pertama. kalau ada yang kurang, kita perbaiki. kalau ada yang menyakitkan, kita bicarakan.
+        kalau salah satu dari kita sedang lelah, kita belajar saling memahami, bukan saling meninggalkan.
+        aku ingin kamu menyelesaikan tanggung jawabmu kepada orang tua, membahagiakan mereka, meraih semua yang kamu
+        impikan, dan menjadi laki-laki yang kelak bisa kamu banggakan di hadapan keluargamu sendiri. aku akan selalu
+        mendoakan semua itu. aku juga sedang berusaha memperjuangkan hidupku sendiri, membahagiakan orang tuaku, dan
+        membangun masa depan yang lebih baik.
+        aku tidak tahu bagaimana perjalanan kita ke depannya, sayang. aku tidak bisa menjanjikan bahwa semuanya akan
+        selalu mudah, tetapi aku ingin selama kita masih saling memilih, jangan biarkan salah satu dari kita berjuang
+        sendirian. aku tidak ingin hanya menjadi seseorang yang kamu cintai ketika semuanya terasa menyenangkan, aku
+        ingin kita tetap saling menggenggam ketika keadaan tidak berjalan sesuai harapan.
+        aku masih di sini, masih dengan perasaan yang sama, masih menyebut namamu dalam doa, dan masih berharap kita
+        bisa sampai pada sesuatu yang selama ini kita bicarakan. aku hanya sedang belajar untuk tidak terlalu takut
+        kehilangan, meskipun jauh di dalam hati aku masih takut sekali merasakan sakit yang sama untuk kedua kalinya.
+        jadi, tolong jangan salah mengartikan ketakutanku sebagai keinginan untuk pergi, yah. aku bukan tidak mau
+        memperjuangkan kamu. aku hanya ingin kali ini, ketika aku memberikan hati dan kepercayaanku kepada seseorang,
+        semoga aku tidak harus mengumpulkan kepingan hatiku sendiri lagi pada akhirnya.
+      </p>
+      <div style="text-align: center; margin-top: 25px; padding-bottom: 5px;">
+        <button class="main-btn" onclick="nextStep(3)">Next? ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Halaman Surat 2 -->
+  <div id="step3" class="section">
+    <div class="envelope">
+      <p>aku gatau nanti akhirnya akan membawa kita gimana, tapi aku senang bisa mencintaimu tanpa adanya rasa penasaran
+        love you more than you know, babyboy.
+      </p>
+      <div style="text-align: center; margin-top: 25px; padding-bottom: 5px;">
+        <button class="main-btn" onclick="nextStep(4)">Next ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Halaman Love Muter -->
+  <div id="step4" class="section" style="max-width: 520px;">
+    <div class="heart-stage">
+      <canvas id="c3"></canvas>
+      <canvas id="c3h"></canvas>
+      <div id="wlayer"></div>
+    </div>
+  </div>
+
+  <script>
+    /* Putar musik saat pertama kali ada interaksi */
+    function playMusic() {
+      const audio = document.getElementById("bgMusic");
+      const video = document.getElementById("bgVideo");
+      if (audio && audio.paused) {
+        audio.play().catch(() => {
+          if (video && video.paused) video.play().catch((e) => console.log(e));
+        });
+      }
+    }
+    window.addEventListener("click", playMusic, { once: true });
+    window.addEventListener("touchstart", playMusic, { once: true });
+
+    function nextStep(step) {
+      document
+        .querySelectorAll(".section")
+        .forEach((s) => s.classList.remove("active"));
+      const target = document.getElementById("step" + step);
+      if (target) {
+        target.classList.add("active");
+        const env = target.querySelector(".envelope");
+        if (env) {
+          env.scrollTop = 0;
+        }
+      }
+
+      // Jika membuka halaman Love Muter (sekarang step 4), inisialisasi animasinya
+      if (step === 4) {
+        setTimeout(initLoveCanvas, 50);
+      }
+    }
+
+    let enteredPin = "";
+    const correctPin = "310701";
+
+    function pressNum(num) {
+      playMusic();
+      if (enteredPin.length < 6) {
+        enteredPin += num;
+        updateDots();
+      }
+      if (enteredPin.length === 6) {
+        if (enteredPin === correctPin) {
+          setTimeout(() => nextStep(2), 500); // Lanjut ke step 2 (Surat)
+        } else {
+          Swal.fire({
+            title: "PIN Salah!",
+            text: "Salah nih 😜 Coba pakai tanggal lahir kamu",
+            icon: "error",
+            confirmButtonColor: "#2563eb",
+          });
+          clearPin();
+        }
+      }
+    }
+
+    function clearPin() {
+      enteredPin = "";
+      updateDots();
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll(".dot");
+      dots.forEach((dot, index) => {
+        if (index < enteredPin.length) dot.classList.add("active");
+        else dot.classList.remove("active");
+      });
+    }
+
+    /* ========================================================
+       KODINGAN HALAMAN LOVE MUTER (CANVAS & ORBITING TEXT)
+       WARNA MERAH GLOWING
+       ======================================================== */
+    const c3 = document.getElementById("c3");
+    const ctx3 = c3.getContext("2d");
+    const c3h = document.getElementById("c3h");
+    const ctx3h = c3h.getContext("2d");
+    const wl = document.getElementById("wlayer");
+
+    const STARS3 = Array.from({ length: 130 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.2 + 0.3,
+      a: Math.random() * 0.7 + 0.2,
+      tw: Math.random() * Math.PI * 2,
+      sp: Math.random() * 0.02 + 0.005,
+    }));
+
+    function drawStars3() {
+      ctx3.clearRect(0, 0, c3.width, c3.height);
+      STARS3.forEach((s) => {
+        s.tw += s.sp;
+        const a = s.a * (0.6 + 0.4 * Math.sin(s.tw));
+        ctx3.beginPath();
+        ctx3.arc(s.x * c3.width, s.y * c3.height, s.r, 0, Math.PI * 2);
+        ctx3.fillStyle = `rgba(255,255,255,${a})`;
+        ctx3.fill();
+      });
+    }
+
+    // Ukuran hati adaptif (otomatis pas di layar HP maupun laptop)
+    function getSZ() {
+      const w = c3h.width || window.innerWidth || 400;
+      return Math.min(w / 34, 13);
+    }
+
+    function hx(t) {
+      const sz = getSZ();
+      return sz * 16 * Math.pow(Math.sin(t), 3);
+    }
+
+    function hy(t) {
+      const sz = getSZ();
+      return (
+        -sz *
+        (13 * Math.cos(t) -
+          5 * Math.cos(2 * t) -
+          2 * Math.cos(3 * t) -
+          Math.cos(4 * t))
+      );
+    }
+
+    // Gambar Hati dengan Warna MERAH Glowing
+    function drawHeartTrail(t) {
+      const cx = c3h.width / 2,
+        cy = c3h.height / 2 - 28;
+      ctx3h.clearRect(0, 0, c3h.width, c3h.height);
+      const N = 300;
+      for (let g = 3; g >= 1; g--) {
+        ctx3h.beginPath();
+        for (let i = 0; i <= N; i++) {
+          const a = (i / N) * 2 * Math.PI;
+          i === 0
+            ? ctx3h.moveTo(cx + hx(a), cy + hy(a))
+            : ctx3h.lineTo(cx + hx(a), cy + hy(a));
+        }
+        ctx3h.closePath();
+        // Pancaran pendar MERAH luar
+        ctx3h.strokeStyle = `rgba(255, 25, 60, ${0.07 * g})`;
+        ctx3h.lineWidth = g * 6;
+        ctx3h.stroke();
+      }
+      ctx3h.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const a = (i / N) * 2 * Math.PI;
+        i === 0
+          ? ctx3h.moveTo(cx + hx(a), cy + hy(a))
+          : ctx3h.lineTo(cx + hx(a), cy + hy(a));
+      }
+      ctx3h.closePath();
+      // Garis lintasan hati MERAH
+      ctx3h.strokeStyle = "rgba(255, 20, 50, 0.45)";
+      ctx3h.lineWidth = 1.5;
+      ctx3h.stroke();
+
+      // Ekor partikel lintasan hati (Trail) MERAH
+      for (let i = 30; i >= 0; i--) {
+        const ta = t - i * 0.012,
+          f = (30 - i) / 30;
+        ctx3h.beginPath();
+        ctx3h.arc(cx + hx(ta), cy + hy(ta), 3 * f, 0, Math.PI * 2);
+        ctx3h.fillStyle = `rgba(255, 40, 70, ${f * 0.95})`;
+        ctx3h.fill();
+      }
+
+      // Kepala partikel bersinar (Leading particle) MERAH & PUTIH
+      const lx = cx + hx(t),
+        ly = cy + hy(t);
+      const gr = ctx3h.createRadialGradient(lx, ly, 0, lx, ly, 10);
+      gr.addColorStop(0, "rgba(255, 255, 255, 1)");
+      gr.addColorStop(0.3, "rgba(255, 30, 60, 0.9)");
+      gr.addColorStop(1, "rgba(200, 0, 30, 0)");
+      ctx3h.beginPath();
+      ctx3h.arc(lx, ly, 10, 0, Math.PI * 2);
+      ctx3h.fillStyle = gr;
+      ctx3h.fill();
+    }
+
+    const COUNT = 32,
+      WSPD = 0.0012;
+    const wordEls = [];
+
+    function updateWords() {
+      const cx = c3h.width / 2,
+        cy = c3h.height / 2 - 28;
+      wordEls.forEach((w) => {
+        w.t += WSPD;
+        w.el.style.left = cx + hx(w.t) + "px";
+        w.el.style.top = cy + hy(w.t) + "px";
+      });
+    }
+
+    let loveInitialized = false;
+    let heartT = 0;
+    let loveAnimId = null;
+
+    function initLoveCanvas() {
+      const stage = document.querySelector(".heart-stage");
+      const w = stage.clientWidth || 360;
+      const h = stage.clientHeight || 420;
+
+      c3.width = w;
+      c3.height = h;
+      c3h.width = w;
+      c3h.height = h;
+
+      if (!loveInitialized) {
+        loveInitialized = true;
+        for (let i = 0; i < COUNT; i++) {
+          const el = document.createElement("div");
+          el.className = "word";
+          el.textContent = "I Love You Babyboy";
+          wl.appendChild(el);
+          wordEls.push({ el, t: (i / COUNT) * 2 * Math.PI });
+        }
+      }
+
+      if (!loveAnimId) {
+        function loopLove() {
+          drawStars3();
+          drawHeartTrail(heartT);
+          updateWords();
+          heartT += 0.012;
+          loveAnimId = requestAnimationFrame(loopLove);
+        }
+        loopLove();
+      }
+    }
+  </script>
+</body>
+
+</html>
